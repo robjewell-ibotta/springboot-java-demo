@@ -1,10 +1,12 @@
 package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@EnableTransactionManagement
 @RestController
 @RequestMapping(path = "api/v1/students")
 public class StudentController {
@@ -16,6 +18,11 @@ public class StudentController {
     this.studentService = studentService;
   }
 
+  @PutMapping(path = "{studentId}")
+  public Student updateStudent(@RequestBody Student student, @PathVariable Long studentId) {
+    
+    return studentService.updateStudent(studentId, student);
+  }
 
   @GetMapping
   public List<Student> getStudents() {
