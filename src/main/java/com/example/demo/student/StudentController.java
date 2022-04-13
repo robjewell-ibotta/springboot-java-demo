@@ -19,9 +19,13 @@ public class StudentController {
   }
 
   @PutMapping(path = "{studentId}")
-  public Student updateStudent(@RequestBody Student student, @PathVariable Long studentId) {
-    
-    return studentService.updateStudent(studentId, student);
+  public Student updateStudent(
+          @PathVariable Long studentId,
+          @RequestParam(required = false) String name,
+          @RequestParam(required = false) String email
+  ) {
+
+    return studentService.updateStudent(studentId, name, email);
   }
 
   @GetMapping
